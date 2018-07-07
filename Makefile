@@ -17,7 +17,7 @@ benchmark:
 
 .PHONY: run
 run:
-	docker run -it -d $(DEVICE_FLAG) --name=eth eth:latest
+	docker run -dit --restart=unless-stopped $(DEVICE_FLAG) --name=eth eth:latest
 
 .PHONY: shell
 shell:
