@@ -3,8 +3,8 @@ FROM ubuntu:18.04
 MAINTAINER sickyoon <sick.yoon@gmail.com>
 LABEL description="AMD OpenCL ethminer"
 
-ARG amdgpu_ver=18.40-697810-ubuntu-18.04
-ARG ethminer_ver=0.17.0-rc.0
+ARG amdgpu_ver=19.30-934563-ubuntu-18.04
+ARG ethminer_ver=0.19.0-alpha.0
 
 ENV amdgpu_ver=$amdgpu_ver
 ENV ethminer_ver=$ethminer_ver
@@ -28,9 +28,9 @@ RUN apt-get -y autoclean
 RUN rm -rf /var/lib/{apt,dpkg,cache,log}
 
 # install ethminer
-RUN curl -L -O https://github.com/ethereum-mining/ethminer/releases/download/v${ethminer_ver}/ethminer-${ethminer_ver}-linux-x86_64.tar.gz
-RUN tar -xvf ethminer-${ethminer_ver}-linux-x86_64.tar.gz
-RUN rm ethminer-${ethminer_ver}-linux-x86_64.tar.gz
+RUN curl -L -O https://github.com/ethereum-mining/ethminer/releases/download/v${ethminer_ver}/ethminer-${ethminer_ver}-cuda-9-linux-x86_64.tar.gz
+RUN tar -xvf ethminer-${ethminer_ver}-cuda-9-linux-x86_64.tar.gz
+RUN rm ethminer-${ethminer_ver}-cuda-9-linux-x86_64.tar.gz
 RUN mv bin/ethminer /usr/local/bin/ethminer
 RUN rm -r bin
 

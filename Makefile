@@ -13,7 +13,7 @@ test:
 
 .PHONY: benchmark
 benchmark:
-	docker run --rm $(DEVICE_FLAG) eth:latest -G -M 0
+	docker run --rm $(DEVICE_FLAG) eth:latest -G -M 7900888
 
 .PHONY: run
 run:
@@ -22,4 +22,8 @@ run:
 .PHONY: shell
 shell:
 	docker run -it --rm $(DEVICE_FLAG) --entrypoint=/bin/bash eth:latest
+
+.PHONY: install
+install:
+	helm install eth --debug ./chart/.
 
