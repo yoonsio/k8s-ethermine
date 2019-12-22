@@ -3,13 +3,15 @@
 # Declare variables to be passed into your templates.
 
 gpuCount: 4
+stratumAddr1: 'stratum+ssl://0xd0f4bb2257e7e686255881bf0520240c3b862628@us1.ethermine.org:5555'
+stratumAddr2: 'stratum+ssl://0xd0f4bb2257e7e686255881bf0520240c3b862628@us2.ethermine.org:5555'
 
 replicaCount: 1
 
 image:
-  repository: localhost:5000/eth
+  repository: sickyoon/ethminer-amd
   tag: latest
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 nameOverride: ""
 fullnameOverride: ""

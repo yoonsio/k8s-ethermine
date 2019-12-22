@@ -14,13 +14,11 @@ WORKDIR /tmp
 # install amd driver
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    #apt-get -y full-upgrade && \
     apt-get -y --no-install-recommends install \
       curl \
       ca-certificates \
       xz-utils
-COPY amdgpu-pro-${amdgpu_ver}.tar.xz /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz
-RUN ls -al /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz
+RUN curl --output /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz --referer https://www.amd.com/en/support/graphics/radeon-500-series/radeon-rx-500-series/radeon-rx-580 https://drivers.amd.com/drivers/linux/amdgpu-pro-${amdgpu_ver}.tar.xz
 RUN tar -Jxvf /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz
 RUN /tmp/amdgpu-pro-${amdgpu_ver}/amdgpu-pro-install -y --headless --opencl=legacy
 RUN apt-get -y autoremove
@@ -41,13 +39,3 @@ ENV GPU_MAX_ALLOC_PERCENT 100
 ENV GPU_SINGLE_ALLOC_PERCENT 100
 
 ENTRYPOINT ["/usr/local/bin/ethminer"]
-CMD [ \
-  "-R", \
-  "-G", \ 
-  "--tstop", "80", \
-  "--tstart", "74", \
-  "-P", \
-  "stratum+ssl://0xd0f4bb2257e7e686255881bf0520240c3b862628@us1.ethermine.org:5555", \
-  "stratum+ssl://0xd0f4bb2257e7e686255881bf0520240c3b862628@us2.ethermine.org:5555" \
-]
-

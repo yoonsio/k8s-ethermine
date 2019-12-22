@@ -23,6 +23,11 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: [
+            '-R', '-G', '--tstop', '80', '--tstart', '74', '-P',
+            '{{ .Values.stratumAddr1 }}',
+            '{{ .Values.stratumAddr2 }}'
+          ]
           livenessProbe:
             exec:
               command:
