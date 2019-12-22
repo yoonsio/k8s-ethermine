@@ -17,7 +17,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get -y --no-install-recommends install \
       curl \
       ca-certificates \
-      xz-utils
+      xz-utils \
+      jq
+COPY minestat /usr/local/bin/minestat
 RUN curl --output /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz --referer https://www.amd.com/en/support/graphics/radeon-500-series/radeon-rx-500-series/radeon-rx-580 https://drivers.amd.com/drivers/linux/amdgpu-pro-${amdgpu_ver}.tar.xz
 RUN tar -Jxvf /tmp/amdgpu-pro-${amdgpu_ver}.tar.xz
 RUN /tmp/amdgpu-pro-${amdgpu_ver}/amdgpu-pro-install -y --headless --opencl=legacy

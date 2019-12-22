@@ -1,0 +1,8 @@
+#!/bin/bash
+hr=$(curl -s https://api.ethermine.org/miner/${ADDR}/dashboard | jq -r '.data.workers[0].reportedHashrate')
+echo $hr
+if [ $hr -lt 100 ]; then
+  echo "something fucked up"
+  exit 1
+fi
+exit 0

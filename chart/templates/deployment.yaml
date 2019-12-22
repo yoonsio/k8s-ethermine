@@ -25,16 +25,24 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args: [
             '-R', '-G', '--tstop', '80', '--tstart', '74', '-P',
-            '{{ .Values.stratumAddr1 }}',
-            '{{ .Values.stratumAddr2 }}'
+            'stratum+ssl://0x{{ .Values.addr }}@us1.ethermine.org:5555',
+            'stratum+ssl://0x{{ .Values.addr }}@us2.ethermine.org:5555'
           ]
           livenessProbe:
             exec:
               command:
-              - /usr/local/bin/ethminer
-              - --help
-            initialDelaySeconds: 30
-            periodSeconds: 60
+              - /usr/local/bin/minestat
+            initialDelaySeconds: 130
+            periodSeconds: 120
+          readinessProbe:
+            exec:
+              command:
+              - /usr/local/bin/minestat
+            initialDelaySeconds: 130
+            periodSeconds: 120
+          env:
+          - name: ADDR
+            value: {{ .Values.addr }}
           resources:
             limits:
               amd.com/gpu: {{ .Values.gpuCount  }}
