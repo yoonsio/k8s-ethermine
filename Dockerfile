@@ -31,7 +31,7 @@ RUN rm -rf /var/lib/{apt,dpkg,cache,log}
 RUN curl -L -O https://github.com/ethereum-mining/ethminer/releases/download/v${ethminer_ver}/ethminer-${ethminer_ver}-linux-x86_64.tar.gz
 RUN tar -xvf ethminer-${ethminer_ver}-linux-x86_64.tar.gz
 RUN rm ethminer-${ethminer_ver}-linux-x86_64.tar.gz
-RUN mv bin/ethminer /usr/local/bin/ethminer
+RUN mv bin/* /usr/local/bin/.
 RUN rm -r bin
 
 ENV GPU_FORCE_64BIT_PTR 1
