@@ -28,18 +28,6 @@ spec:
             'stratum+ssl://0x{{ .Values.addr }}@us1.ethermine.org:5555',
             'stratum+ssl://0x{{ .Values.addr }}@us2.ethermine.org:5555'
           ]
-          livenessProbe:
-            exec:
-              command:
-              - /usr/local/bin/minestat
-            initialDelaySeconds: 130
-            periodSeconds: 120
-          readinessProbe:
-            exec:
-              command:
-              - /usr/local/bin/minestat
-            initialDelaySeconds: 130
-            periodSeconds: 120
           env:
           - name: ADDR
             value: {{ .Values.addr }}

@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER sickyoon <sick.yoon@gmail.com>
 LABEL description="AMD OpenCL ethminer"
 
-ARG amdgpu_ver=19.30-934563-ubuntu-18.04
+ARG amdgpu_ver=20.30-1109583-ubuntu-18.04
 ARG ethminer_ver=0.17.1
 
 ENV amdgpu_ver=$amdgpu_ver
@@ -34,10 +34,10 @@ RUN rm ethminer-${ethminer_ver}-linux-x86_64.tar.gz
 RUN mv bin/* /usr/local/bin/.
 RUN rm -r bin
 
-ENV GPU_FORCE_64BIT_PTR 1
-ENV GPU_MAX_HEAP_SIZE 100
-ENV GPU_USE_SYNC_OBJECTS 1
-ENV GPU_MAX_ALLOC_PERCENT 100
-ENV GPU_SINGLE_ALLOC_PERCENT 100
+RUN export GPU_FORCE_64BIT_PTR=1
+RUN export GPU_MAX_HEAP_SIZE=100
+RUN export GPU_USE_SYNC_OBJECTS=1
+RUN export GPU_MAX_ALLOC_PERCENT=100
+RUN export GPU_SINGLE_ALLOC_PERCENT=100
 
 ENTRYPOINT ["/usr/local/bin/ethminer"]
